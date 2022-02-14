@@ -3,12 +3,12 @@ import numpy as np
 
 
 class Planet:
-    def __init__(self, name, mass, position, velocity, acceleration):
+    def __init__(self, name, mass, position, velocity):
         self.name = name  # planet name
         self.mass = mass  # gravitational parameter, in km^3/s^2
         self.position = position  # a vector list, in km
         self.velocity = velocity  # a vector list, in km/s
-        self.acceleration = acceleration  # a vector list, in km/s^2
+        self.acceleration = []  # a vector list, in km/s^2
         self.x = []
         self.y = []
         self.z = []
@@ -35,6 +35,10 @@ def increment_position(planet):
     for coordinate in range(3):
         planet.position[coordinate] = planet.position[coordinate] + planet.velocity[coordinate]*constants.dt
         # new position = old position + vdt
+    # next three lines append data for visualization
+    planet.x.append(planet.position[0])
+    planet.y.append(planet.position[1])
+    planet.z.append(planet.position[2])
 
 
 def increment_velocity(planet):
@@ -47,7 +51,7 @@ def distance(planet1, planet2):
     del_x = planet1.position[0] - planet2.position[0]
     del_y = planet1.position[1] - planet2.position[1]
     del_z = planet1.position[2] - planet2.position[2]
-    dist = (np.power(del_x,2) + del_y**2 + del_z**2)**0.5
+    dist = (del_x**2 + del_y**2 + del_z**2)**0.5
     # distance = sqrt(delta x ^2 + ...)
     return dist
 
@@ -65,9 +69,10 @@ def calculate_acceleration(planet, system):
     for subject in range(len(system)):  # iterates through all objects in system
         body = system[subject]  # a body pulling on the current object
         if planet.name != body.name:  # excludes self from calculation
-            a_x += ((body.mass * difference(planet, body, 0)/10**6) / np.power(distance(planet, body)/10**6, 3))/10**12
-            a_y += ((body.mass * difference(planet, body, 1)/10**6) / np.power(distance(planet, body)/10**6, 3))/10**12
-            a_z += ((body.mass * difference(planet, body, 2)/10**6) / np.power(distance(planet, body)/10**6, 3))/10**12
+            mass_over_dist_cube = body.mass / np.power(distance(planet, body), 3)
+            a_x += mass_over_dist_cube * difference(planet, body, 0)
+            a_y += mass_over_dist_cube * difference(planet, body, 1)
+            a_z += mass_over_dist_cube * difference(planet, body, 2)
     planet.acceleration = [a_x, a_y, a_z]  # sets acceleration within planet object
 
 

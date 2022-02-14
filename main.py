@@ -12,11 +12,7 @@ while time < constants.limit:
         fxn.calculate_acceleration(ss.system[planet], ss.system)  # finds new acceleration due to all objects in system
         fxn.increment_velocity(ss.system[planet])  # increments velocity for planet
     for planet in range(len(ss.system)):  # once all new velocities are calculated, starts moving objects
-        fxn.increment_position(ss.system[planet])  # moves object
-        # next three lines record data within the object
-        ss.system[planet].x.append(ss.system[planet].position[0])
-        ss.system[planet].y.append(ss.system[planet].position[1])
-        ss.system[planet].z.append(ss.system[planet].position[2])
+        fxn.increment_position(ss.system[planet])  # moves object and appends data
     time += constants.dt
 
 # Visualization
