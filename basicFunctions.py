@@ -18,11 +18,11 @@ class Planet:
         # returns planet's velocity
 
     def display_position(self):
-        print("Current position is " + str(self.position)+ " km")
+        print("Current position is " + str(self.position) + " km")
         # returns planet's position
 
     def display_acceleration(self):
-        print("Current position is " + str(self.acceleration)+ " km/s^2")
+        print("Current position is " + str(self.acceleration) + " km/s^2")
         # returns planet's acceleration
 
     def display_mass(self):
