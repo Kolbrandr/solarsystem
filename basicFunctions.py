@@ -9,9 +9,9 @@ class Planet:
         self.position = position  # a vector list, in km
         self.velocity = velocity  # a vector list, in km/s
         self.acceleration = []  # a vector list, in km/s^2
-        self.x = []
-        self.y = []
-        self.z = []
+        self.x = [position[0]]
+        self.y = [position[1]]
+        self.z = [position[2]]
 
     def display_velocity(self):
         print("Current velocity is " + str(self.velocity) + " km/s")
@@ -22,7 +22,7 @@ class Planet:
         # returns planet's position
 
     def display_acceleration(self):
-        print("Current position is " + str(self.acceleration) + " km/s^2")
+        print("Current acceleration is " + str(self.acceleration) + " km/s^2")
         # returns planet's acceleration
 
     def display_mass(self):

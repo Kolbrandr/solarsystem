@@ -3,7 +3,7 @@ G = 6.674*10**(-20)  # km3⋅kg−1⋅s−2
 
 # Simulation constants
 dt = 3600  # time step in seconds
-limit = 420000000  # time limit of simulation in seconds
+limit = 365.25*24*3600  # time limit of simulation in seconds
 
 # Gravitational Parameters in km^3/s^2
 
